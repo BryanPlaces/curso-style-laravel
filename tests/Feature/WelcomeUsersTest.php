@@ -16,4 +16,13 @@ class WelcomeUsersTest extends TestCase
             ->assertStatus(200)
             ->assertSee("Bienvenido Bryan");
     }
+
+    /**
+     * @test
+     */
+    public function it_welcome_users_with_nickname() {
+        $this->get('saludo/bryan/BryanEdu')
+            ->assertStatus(200)
+            ->assertSee("Bienvenido Bryan, tu apodo es BryanEdu");
+    }
 }

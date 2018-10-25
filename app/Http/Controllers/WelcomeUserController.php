@@ -6,16 +6,17 @@ use Illuminate\Http\Request;
 
 class WelcomeUserController extends Controller {
 
-    public function index($name, $nickname=null) {
-
+    public function index1($name) {
 
         $name = ucfirst($name);
 
-        if ($nickname) {
-            return "Bienvenido {$name}, tu apodo es {$nickname}";
-        }else {
-            return "Bienvenido {$name}";
-        }
+        return "Bienvenido {$name}";
+    }
 
+    public function index2($name, $nickname) {
+
+        $name = ucfirst($name);
+
+        return "Bienvenido {$name}, tu apodo es {$nickname}";
     }
 }

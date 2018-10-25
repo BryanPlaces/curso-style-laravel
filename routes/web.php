@@ -25,4 +25,7 @@ Route::get ('usuarios/{id}', 'UserController@show')
 Route::get ('usuarios/nuevo', 'UserController@create');
 
 
-Route::get('saludo/{name}/{nickname?}', 'WelcomeUserController@index');
+Route::get('saludo/{name}', 'WelcomeUserController@index1');
+
+
+Route::get('saludo/{name}/{nickname}', 'WelcomeUserController@index2');
