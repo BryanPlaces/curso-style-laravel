@@ -8,13 +8,24 @@
     <title>Listado de usuarios</title>
 </head>
 <body>
-    <h1><?= e($title) ?></h1>
+    <h1> {{ $title }}</h1>
 
-    <ul>
-        <?php foreach ($users as $user) { ?>
+    <hr>
 
-            <li><?= e($user) ?> </li>
-        <?php } ?>
-    </ul>
+    @if (!empty($users))
+
+        <ul>
+            @foreach ($users as $user)
+
+                <li> {{ $user }} </li>
+            @endforeach
+        </ul>
+    @else
+        <p>No hay usuarios registrados</p>
+    @endif
+
+
+
+
 </body>
 </html>

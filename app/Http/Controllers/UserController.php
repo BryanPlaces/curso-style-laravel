@@ -8,14 +8,22 @@ class UserController extends Controller {
 
     public function index() {
 
-        $users = [
-            "Joel",
-            "Ellie",
-            "Byron",
-            "Timmy",
-            "Vero",
-            "<script>alert('Clicker')</script>"
-        ];
+        if(request()->has('empty')) {
+
+            $users = [];
+
+        }else {
+
+            $users = [
+                "Joel",
+                "Ellie",
+                "Byron",
+                "Timmy",
+                "Vero",
+                "<script>alert('Clicker')</script>"
+            ];
+        }
+
         return view('users', [
             'users' => $users,
             'title' => "Listado de usuarios"
