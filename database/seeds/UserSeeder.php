@@ -33,19 +33,13 @@ class UserSeeder extends Seeder
             'is_admin'=> true,
         ]);
 
-        User::create([
-            'name' => 'Another User',
-            'email' => 'another@gmail.com',
-            'password'=> bcrypt('laravel'),
-            'profession_id'=> $professionId
+        // Se crea un usuario con valores aleatorios salvo profession_id
+        factory(User::class)->create([
+            'profession_id'=>$professionId,
         ]);
 
-        User::create([
-            'name' => 'Another User',
-            'email' => 'another2@gmail.com',
-            'password'=> bcrypt('laravel'),
-            'profession_id'=> null
-        ]);
+        // Se crea un usuario con valores aleatorios
+        factory(User::class, 48)->create();
 
     }
 }
