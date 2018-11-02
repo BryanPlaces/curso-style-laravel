@@ -28,4 +28,4 @@ Route::get ('usuarios/nuevo', 'UserController@create');
 Route::get('saludo/{name}', 'WelcomeUserController@index1');
 
 
-Route::get('saludo/{name}/{nickname}', 'WelcomeUserController@index2');
+Route::get('saludo/{name}/{nickname?}', 'WelcomeUserController@index2');

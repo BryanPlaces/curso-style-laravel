@@ -2,36 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller {
 
     public function index() {
 
-        if(request()->has('empty')) {
 
-            $users = [];
+        $users = User::all();
+        $title = 'Listado de usuarios';
 
-        }else {
 
-            $users = [
-                "Joel",
-                "Ellie",
-                "Byron",
-                "Timmy",
-                "Vero",
-                "<script>alert('Clicker')</script>"
-            ];
-        }
+//        return view('users.index')
+//            -> with('users', User::all())
+//            -> with('title', 'Listado de usuarios');
 
-        return view('users', [
-            'users' => $users,
-            'title' => "Listado de usuarios"
-        ]);
+        return view('users.index', compact('title', 'users'));
     }
 
     public function show($id) {
-        return "Mostrando detalle del usuario: {$id}";
+        return view('users.show', compact('id'));
     }
 
     public function create () {
