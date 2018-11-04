@@ -76,4 +76,14 @@ class UsersMouleTest extends TestCase
             ->assertSee("Crear nuevo usuario");
     }
 
+    /**
+     * @test
+     */
+
+    function it_displays_a_404_error_if_the_is_not_found() {
+        $this->get('usuarios/999')
+            ->assertStatus(404)
+            ->assertSee('Página no encontrada');
+    }
+
 }
