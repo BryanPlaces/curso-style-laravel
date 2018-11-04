@@ -55,10 +55,15 @@ class UsersMouleTest extends TestCase
     /**
      * @test
      */
-    function it_loads_the_users_detail_page() {
-        $this->get('/usuarios/5')
+    function it_displays_the_users_details() {
+
+        $user = factory(User::class)->create([
+            'name'=>'Bryan Places'
+        ]);
+
+        $this->get('/usuarios/'.$user->id)
             ->assertStatus(200)
-            ->assertSee("Mostrando detalle del usuario: 5");
+            ->assertSee('Bryan Places');
     }
 
     /**
