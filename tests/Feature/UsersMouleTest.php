@@ -73,7 +73,7 @@ class UsersMouleTest extends TestCase
     function it_loads_the_new_users_page() {
         $this->get('/usuarios/nuevo')
             -> assertStatus(200)
-            ->assertSee("Crear nuevo usuario");
+            ->assertSee("Crear usuario");
     }
 
     /**
@@ -85,5 +85,29 @@ class UsersMouleTest extends TestCase
             ->assertStatus(404)
             ->assertSee('Página no encontrada');
     }
+
+    /**
+     * @test
+     */
+
+    function it_creates_a_new_user() {
+
+        $this->post('/usuarios/', [
+            'name'=> 'Bryan',
+            'email'=> 'bryan@gmail.com',
+            'password'=> '123456'
+        ])->assertRedirect('usuarios');
+
+        // comprueba en la base de datos que se ha guardado un usuario
+        // con la contraseña correcta
+        //assertDatabaseHas --> otra opcion
+
+        $this->assertCredentials([
+            'name' => 'Bryan',
+            'email' => 'bryan@gmail.com',
+            'password'=> '123456'
+        ]);
+    }
+
 
 }
