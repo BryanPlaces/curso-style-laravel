@@ -16,7 +16,7 @@
         <br>
 
         <label for="email">Correo electrónico</label>
-        <input type="email" name="email" id="email" placeholder="pedro@example.com">
+        <input type="text" name="email" id="email" placeholder="pedro@example.com">
 
         <br>
 

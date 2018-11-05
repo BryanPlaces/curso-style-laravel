@@ -42,8 +42,14 @@ class UserController extends Controller {
 
     public function store() {
 
-        $data=request()->all();
+        $data=request()->validate([
+            'name'=>'required',
+            'email'=>'required',
+            'password'=> 'required'
+        ], [
+            'name.required' => 'El campo nombre es obligatorio'
 
+        ]);
 
         User::create([
             'name'=> $data['name'],
@@ -52,7 +58,7 @@ class UserController extends Controller {
         ]);
 
 
-//        return redirect('usuarios');
+        //return redirect('usuarios');
         return redirect()->route('users');
     }
 }

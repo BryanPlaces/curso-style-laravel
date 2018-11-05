@@ -93,8 +93,8 @@ class UsersMouleTest extends TestCase
     function it_creates_a_new_user() {
 
         $this->post('/usuarios/', [
-            'name'=> 'Bryan',
-            'email'=> 'bryan@gmail.com',
+            'name'=> 'Eduardo',
+            'email'=> 'eduardo@gmail.com',
             'password'=> '123456'
         ])->assertRedirect('usuarios');
 
@@ -103,10 +103,35 @@ class UsersMouleTest extends TestCase
         //assertDatabaseHas --> otra opcion
 
         $this->assertCredentials([
-            'name' => 'Bryan',
-            'email' => 'bryan@gmail.com',
+            'name' => 'Eduardo',
+            'email' => 'eduardo@gmail.com',
             'password'=> '123456'
         ]);
+    }
+
+
+    /**
+     * @test
+     */
+
+    function the_name_is_required() {
+
+        $this->from('usuarios/nuevo')
+        ->post('/usuarios/', [
+            'name' => '',
+            'email'=> 'bryan@gmail.com',
+            'password'=> '123456'
+        ])->assertRedirect('usuarios/nuevo')
+            -> assertSessionHasErrors(['name' => 'El campo nombre es obligatorio']); // espera que exista un mensaje de error con el campo nombre
+
+
+        $this->assertEquals(0, User::count());
+
+
+//        $this-> assertDatabaseMissing('users', [
+//            'email' => 'bryan@gmail.com'
+//        ]);
+
     }
 
 
