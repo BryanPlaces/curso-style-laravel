@@ -47,7 +47,9 @@ class UserController extends Controller {
             'email'=>'required',
             'password'=> 'required'
         ], [
-            'name.required' => 'El campo nombre es obligatorio'
+            'name.required' => 'El campo nombre es obligatorio',
+            'email.required' => 'El campo email es obligatorio',
+            'password.required' => 'El campo password es obligatorio'
 
         ]);
 
