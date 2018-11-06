@@ -333,19 +333,25 @@ class UsersMouleTest extends TestCase
      * @test
      */
 
-    function the_password_is_required_when_updating_the_user() {
+    function the_password_is_optional_when_updating_the_user() {
 
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->create([
+            'password' => bcrypt('clave_anterior')
+        ]);
 
         $this->from("usuarios/{$user->id}/editar")
             ->put("/usuarios/{$user->id}", [
                 'name' => 'Bryan',
                 'email'=> 'bryan@gmail.com',
                 'password'=> ''
-            ])->assertRedirect("usuarios/{$user->id}/editar")
-            -> assertSessionHasErrors(['password']);
+            ])
+            ->assertRedirect("usuarios/{$user->id}"); // (users.show)
 
-        $this->assertDatabaseMissing('users', ['email' => 'bryan@gmail.com']);
+        $this->assertCredentials([
+            'name' => 'Bryan',
+            'email' => 'bryan@gmail.com',
+            'password' => 'clave_anterior'
+        ]);
     }
 
 
