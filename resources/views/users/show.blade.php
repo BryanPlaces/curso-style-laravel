@@ -4,14 +4,22 @@
 @section('title', "Usuario {$user->id}")
 
 @section('content')
-    <h1>Usuario #{{ $user->id  }}</h1>
 
-    <p>Nombre del usuario: {{ $user->name }}</p>
-    <p>Correo electronico: {{ $user->email }}</p>
+    <div class="card">
+        <h4 class="card-header">Usuario {{$user->id}}</h4>
 
-    <p>
-        <a href="{{ route('users.index') }}">Regresar al listado de usuarios</a>
-    </p>
+        <div class="card-body">
+            <p>Nombre del usuario: {{ $user->name }}</p>
+            <p>Correo electronico: {{ $user->email }}</p>
+
+
+            <p>
+                <a href="{{ route('users.index') }}" class="btn btn-link">Regresar al listado de usuarios</a>
+            </p>
+
+        </div>
+    </div>
+
 
 @endsection
 

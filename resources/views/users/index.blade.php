@@ -3,32 +3,52 @@
 @section('title','Usuarios')
 
 @section('content')
-    <h1> {{ $title}} </h1>
 
-    <a href="{{ route('users.create') }}">Nuevo Usuario</a>
+    <div class="d-flex justify-content-between align-items-end">
+        <h1> {{ $title}} </h1>
 
-    <ul>
+        <p>
+            <a href="{{ route('users.create') }}" class="btn btn-primary">Nuevo Usuario</a>
+        </p>
+    </div>
 
-        @forelse( $users as $user)
-
-            <li>
-                {{$user->name}}, ({{ $user->email }})
-                <a href="{{ route('users.show', $user) }}">Ver detalles</a> |
-                <a href="{{ route('users.edit', $user) }}">Editar</a> |
-
+    @if ($users->isNotEmpty())
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($users as $user)
+        <tr>
+            <th scope="row">{{ $user->id }}</th>
+            <td>{{ $user->name }}</td>
+            <td>{{ $user->email }}</td>
+            <td>
                 <form method="POST" action="{{ route('users.destroy', $user) }}">
                     {!! csrf_field() !!}
                     {!! method_field('DELETE') !!}
-                    <button type="submit">Eliminar</button>
+
+                    <a class="btn btn-link" href="{{ route('users.show', $user) }}"><span class="oi oi-eye"></span></a>
+                    <a class="btn btn-link" href="{{ route('users.edit', $user) }}"><span class="oi oi-pencil"></span></a>
+
+                    <button type="submit" class="btn btn-link"><span class="oi oi-trash"></span></button>
 
                 </form>
-            </li>
-        @empty
+            </td>
+        </tr>
+        @endforeach
+        </tbody>
+    </table>
+    @else
+        <p>No hay usuarios registrados.</p>
+    @endif
 
-            <li>No hay usuarios registrados.</li>
 
-        @endforelse
-    </ul>
 @endsection
 
 @section('sidebar')
